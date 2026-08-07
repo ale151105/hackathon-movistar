@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function ChatBot({ onCerrar }) {
+export default function ChatBot({ onCerrar, onVerEstadisticas }) {
   const [mensajes, setMensajes] = useState([
     { id: "msg_001", emisor: "bot", texto: "Hola, detecté un cambio en tu recibo de este mes. ¿Quieres que te explique?", timestamp: "10:14" },
     { id: "msg_002", emisor: "cliente", texto: "Sí, ¿por qué subió?", timestamp: "10:14" },
@@ -25,7 +25,7 @@ export default function ChatBot({ onCerrar }) {
   };
 
   return (
-    <div style={{ maxWidth: '420px', margin: '20px auto', height: '520px', border: '1px solid #e0e0e0', borderRadius: '16px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 8px 24px rgba(0,0,0,0.12)', backgroundColor: '#fff' }}>
+    <div style={{ maxWidth: '420px', margin: '20px auto', height: '560px', border: '1px solid #e0e0e0', borderRadius: '16px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 8px 24px rgba(0,0,0,0.12)', backgroundColor: '#fff' }}>
       
       {/* Cabecera del Chat */}
       <div style={{ backgroundColor: '#019DF4', color: '#fff', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -39,6 +39,17 @@ export default function ChatBot({ onCerrar }) {
         <button onClick={onCerrar} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '18px', cursor: 'pointer' }}>✖</button>
       </div>
 
+      {/* Acceso directo a estadísticas (Componente 1 del PDF) */}
+      <div style={{ backgroundColor: '#E6F5FD', padding: '8px 16px', borderBottom: '1px solid #BCE3F9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: '11px', color: '#0B2739', fontWeight: '500' }}>¿Solo quieres consultar tus números?</span>
+        <button 
+          onClick={onVerEstadisticas}
+          style={{ backgroundColor: '#019DF4', color: '#fff', border: 'none', padding: '4px 8px', borderRadius: '4px', fontSize: '11px', cursor: 'pointer', fontWeight: 'bold' }}
+        >
+          Ver consumo 📊
+        </button>
+      </div>
+
       {/* Lista de Mensajes */}
       <div style={{ flex: 1, padding: '16px', overflowY: 'auto', backgroundColor: '#F8F9FA', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {mensajes.map((msg) => (
@@ -50,7 +61,7 @@ export default function ChatBot({ onCerrar }) {
               color: msg.emisor === 'cliente' ? '#fff' : '#212529',
               padding: '10px 14px',
               borderRadius: '14px',
-              maxWidth: '75%',
+              maxWidth: '80%',
               fontSize: '13px',
               boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
             }}
@@ -59,8 +70,32 @@ export default function ChatBot({ onCerrar }) {
             <div style={{ fontSize: '10px', textAlign: 'right', marginTop: '4px', opacity: 0.7 }}>{msg.timestamp}</div>
           </div>
         ))}
-      </div>
 
+    {/* Botones de recomendación de acciones (Componente 5 del PDF) */}
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '6px' }}>
+          <button style={{ backgroundColor: '#fff', border: '1px solid #019DF4', color: '#019DF4', padding: '6px 12px', borderRadius: '16px', fontSize: '11px', cursor: 'pointer', fontWeight: 'bold' }}>
+            💳 Pagar recibo
+          </button>
+          <button style={{ backgroundColor: '#fff', border: '1px solid #019DF4', color: '#019DF4', padding: '6px 12px', borderRadius: '16px', fontSize: '11px', cursor: 'pointer', fontWeight: 'bold' }}>
+            📄 Ver detalle
+          </button>
+        </div>
+      </div>
+      {/* Efecto Efervescente: Beneficio del plan al cerrar (Componente 6) */}
+        <div style={{
+          backgroundColor: '#E6F5FD',
+          border: '1px dashed #019DF4',
+          borderRadius: '12px',
+          padding: '10px 14px',
+          marginTop: '10px',
+          textAlign: 'center'
+        }}>
+          <span style={{ fontSize: '16px' }}>🎁</span>
+          <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: '#0B2739', fontWeight: '600' }}>
+            ¡Recuerda que tu plan incluye redes sociales ilimitadas sin consumo de datos!
+          </p>
+        </div>
+    </div>
       {/* Formulario de envío */}
       <form onSubmit={enviarMensaje} style={{ display: 'flex', padding: '10px', borderTop: '1px solid #eee', backgroundColor: '#fff' }}>
         <input
