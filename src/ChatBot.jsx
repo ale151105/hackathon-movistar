@@ -60,7 +60,21 @@ export default function ChatBot({ onCerrar }) {
           </div>
         ))}
       </div>
-
+      {/* Efecto Efervescente: Beneficio del plan al cerrar (Componente 6) */}
+        <div style={{
+          backgroundColor: '#E6F5FD',
+          border: '1px dashed #019DF4',
+          borderRadius: '12px',
+          padding: '10px 14px',
+          marginTop: '10px',
+          textAlign: 'center'
+        }}>
+          <span style={{ fontSize: '16px' }}>🎁</span>
+          <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: '#0B2739', fontWeight: '600' }}>
+            ¡Recuerda que tu plan incluye redes sociales ilimitadas sin consumo de datos!
+          </p>
+        </div>
+      </div>
       {/* Formulario de envío */}
       <form onSubmit={enviarMensaje} style={{ display: 'flex', padding: '10px', borderTop: '1px solid #eee', backgroundColor: '#fff' }}>
         <input
